@@ -1,0 +1,11 @@
+torch>=2.0.0
+transformers>=4.30.0
+accelerate>=0.20.0
+safetensors>=0.3.0
+numpy>=1.21.0
+typing-extensions>=4.0.0 
+Pillow>=8.0.0
+timm>=0.9.0
+matplotlib>=3.5.0
+seaborn>=0.11.0 
+inspect_ai==0.3.90

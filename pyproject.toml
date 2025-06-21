@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dlminterp"
+version = "0.1.0"
+description = "LLaDA model inference and evaluation tools with Inspect AI integration"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "torch",
+    "transformers",
+    "numpy",
+    "inspect-ai"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "flake8"
+]
+
+# Register the LLaDA model API with Inspect AI
+[project.entry-points.inspect_ai]
+dlminterp = "llada_inspect._registry"
+
+[tool.setuptools.packages.find]
+include = ["llada_inspect*", "*.py"]
+exclude = ["tests*"] 
