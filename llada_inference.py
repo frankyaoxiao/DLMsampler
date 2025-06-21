@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from transformers import AutoModel, AutoTokenizer
 import warnings
 import os
+import math
 warnings.filterwarnings("ignore")
 
 _model = None
@@ -103,7 +104,7 @@ def llada_generate(model, prompt, steps=128, gen_length=128, block_length=128, t
         block_length: Block length, less than or equal to gen_length. If less than gen_length, it means using semi_autoregressive remasking.
         temperature: Categorical distribution sampling temperature.
         cfg_scale: Unsupervised classifier-free guidance scale.
-        remasking: Remasking strategy. 'low_confidence' or 'random'.
+        remasking: Remasking strategy - 'low_confidence' (semi-autoregressive) or 'random' (default: 'low_confidence')
         mask_id: The token id of [MASK] is 126336.
         save_history: Whether to save generation history for analysis.
     
@@ -447,7 +448,7 @@ def generate_texts_batch(prompts, gen_length=128, steps=128, block_length=32, te
         block_length (int): Block length for semi-autoregressive generation (default: 32)
         temperature (float): Sampling temperature, 0 = deterministic (default: 0.0)
         cfg_scale (float): Classifier-free guidance scale (default: 0.0)
-        remasking (str): Remasking strategy - 'low_confidence' or 'random' (default: 'low_confidence')
+        remasking (str): Remasking strategy - 'low_confidence' (semi-autoregressive) or 'random' (default: 'low_confidence')
         save_history (bool): Whether to save generation history for analysis (default: False)
         batch_size (int): Maximum batch size for processing. If None, processes all at once (default: None)
         unload_after (bool): Whether to unload the model after processing (default: False)
